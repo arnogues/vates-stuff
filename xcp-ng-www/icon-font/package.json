@@ -1,0 +1,15 @@
+{
+  "name": "icon-font-vates",
+  "version": "1.0.0",
+  "description": "icon font for xcp-ng deploy page",
+  "main": "index.js",
+  "scripts": {
+    "build": "fantasticon && node templates/sasstocss.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fantasticon": "^2.0.0",
+    "sass": "^1.58.3"
+  }
+}
