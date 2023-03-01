@@ -1,5 +1,7 @@
 #systems
 .DS_STORE
+.idea
+.vscode
 
 # Logs
 logs
