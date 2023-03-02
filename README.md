@@ -3,7 +3,10 @@
 Vates tooling for some projects
 
 All stuff in this repository is for Vates
+Vates can do whatever they want.
+
+License is DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
 
 ## xcp-ng-www
 
-Read the Readme file for more informations
+Stuff for XCP-NG deploy page. [Read the README](xcp-ng-www/README.md) for more information
