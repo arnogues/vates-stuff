@@ -21,3 +21,6 @@ Copy the content of the `build` folder into the deploy folder page font folder.
 # Icons origins (license):
 
 All informations are in the file build/icons-credit.txt
+
+Self made icons, are under license : CC-BY-SA
+The others icons have a link to their origin and their license.
