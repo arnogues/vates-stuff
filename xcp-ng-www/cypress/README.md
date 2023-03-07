@@ -5,11 +5,17 @@
 Start the local static server
 
 ```
-  npm start -- --directory  <xcpng-release-folder>/src/xenserver/opt/xensource/www
+  npm run ws -- --directory  <xcpng-release-folder>/src/xenserver/opt/xensource/www
 ```
 
 ## Run tests
 
 ```
-  npm run cypress
+  npm run cypress:open
+```
+
+## Run cypress and http server in parallel
+
+```
+  npm start -- <xcpng-release-folder>/src/xenserver/opt/xensource/www
 ```
