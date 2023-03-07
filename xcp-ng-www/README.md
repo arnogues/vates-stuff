@@ -9,4 +9,4 @@ Branch 8.2 but will be change in the future
 # The tools are in 2 parts :
 
 - The [custom icon-font](icon-font/README.md) in `icon-font` folder made from differents sources
-- The Cypress tests with mocks and documentation to test and run the page
+- The [Cypress tests](cypress/README.md) with mocks and documentation to test and run the page

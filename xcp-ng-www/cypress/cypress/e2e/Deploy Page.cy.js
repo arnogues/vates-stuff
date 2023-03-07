@@ -5,6 +5,7 @@
 */
 
 describe("Deploy", () => {
+  const ipAddressToConfig = "127.0.0.1:8000";
   beforeEach(() => {
     Cypress.Keyboard.defaults({
       keystrokeDelay: 0,
@@ -13,7 +14,7 @@ describe("Deploy", () => {
       overwrite: true,
     });
     cy.viewport(1280, 1200);
-    cy.visit("http://localhost:8000/XCP-ng-index.html");
+    cy.visit("https://localhost:8000/XCP-ng-index.html");
   });
   it("Xen Orchestra Page", () => {
     cy.get("html").screenshot();
@@ -31,9 +32,7 @@ describe("Deploy", () => {
     cy.get(".modal").should("not.be.visible");
   });
 
-  it.only("Xen Orchestra Quick Deploy Spinner", () => {
-    cy.clock();
-
+  const doModalActions = () => {
     // mock session.ligin_with_password
     require("./mocks/jsonRpc.js");
     cy.contains("Quick deploy").click();
@@ -43,7 +42,7 @@ describe("Deploy", () => {
     cy.contains("Connect").click();
 
     // Xen Orchestra Quick Deploy form
-    cy.get("#ip").type("127.0.0.1:8000");
+    cy.get("#ip").type(ipAddressToConfig);
     cy.get("#gateway").type("127.0.0.1");
     cy.get("#dns").type("1.1.0.0");
     cy.contains("Next").click();
@@ -63,11 +62,19 @@ describe("Deploy", () => {
 
     cy.contains("Deploy").click();
     cy.contains("Deploy").first().screenshot();
-    return;
     cy.contains("XOA is ready! Redirecting…").should("be.visible");
-    cy.tick(3000);
-    cy.origin("http://127.0.0.1:8000", () => {
-      cy.location("href").should("match", /127.0.0.1/);
+  };
+
+  it("Xen Orchestra Quick Deploy Spinner", () => {
+    doModalActions();
+  });
+
+  it("Xen Orchestra Quick Deploy redirect to new page", () => {
+    cy.clock();
+    doModalActions();
+    cy.tick(4000);
+    cy.origin(ipAddressToConfig, { args: { ipAddressToConfig } }, ({ ipAddressToConfig }) => {
+      cy.location("href").should("match", new RegExp(ipAddressToConfig));
     });
   });
 });

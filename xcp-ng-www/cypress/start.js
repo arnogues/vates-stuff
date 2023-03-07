@@ -4,7 +4,7 @@ const cliArgs = process.argv.slice(2);
 
 console.log(cliArgs);
 
-const ws = spawn("npm", ["run", "ws", "--", "--directory", cliArgs[0]]);
+const ws = spawn("npm", ["run", "ws", "--", "--https", "--directory", cliArgs[0]]);
 
 ws.stdout.on("data", (data) => {
   console.log(`WS stdout: ${data}`);
@@ -18,7 +18,7 @@ ws.on("close", (code) => {
   console.log(`WS child process exited with code ${code}`);
 });
 
-const cypress = spawn("npm", ["run", "cypress:run"]);
+const cypress = spawn("npm", ["run", "cypress:open"]);
 
 cypress.stdout.on("data", (data) => {
   console.log(`Cypress stdout: ${data}`);
