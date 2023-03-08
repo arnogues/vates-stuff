@@ -20,10 +20,6 @@ describe("Deploy", () => {
     cy.visit("https://localhost:8000/XCP-ng-index.html");
   });
 
-  afterEach(() => {
-    //if (interceptors) interceptors.forEach((interceptor) => interceptor.dispose());
-  });
-
   it("Xen Orchestra Page", () => {
     cy.get("html").screenshot();
   });
