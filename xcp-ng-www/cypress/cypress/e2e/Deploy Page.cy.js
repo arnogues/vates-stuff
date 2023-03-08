@@ -3,9 +3,11 @@
    You can also add a return before the end of the function to show a step
    and check the visual state of the page
 */
+import intercept from "./mocks/jsonRpc.js";
 
 describe("Deploy", () => {
   const ipAddressToConfig = "127.0.0.1:8000";
+  let interceptors;
   beforeEach(() => {
     Cypress.Keyboard.defaults({
       keystrokeDelay: 0,
@@ -13,9 +15,15 @@ describe("Deploy", () => {
     Cypress.Screenshot.defaults({
       overwrite: true,
     });
+    intercept();
     cy.viewport(1280, 1200);
     cy.visit("https://localhost:8000/XCP-ng-index.html");
   });
+
+  afterEach(() => {
+    //if (interceptors) interceptors.forEach((interceptor) => interceptor.dispose());
+  });
+
   it("Xen Orchestra Page", () => {
     cy.get("html").screenshot();
   });
@@ -33,8 +41,8 @@ describe("Deploy", () => {
   });
 
   const doModalActions = () => {
+    cy.clock();
     // mock session.ligin_with_password
-    require("./mocks/jsonRpc.js");
     cy.contains("Quick deploy").click();
 
     // connect
@@ -52,25 +60,23 @@ describe("Deploy", () => {
     cy.get("#updaterPwd").type("password");
     cy.get("#xoaPwd").type("password");
 
-    cy.intercept("POST", "api", {
+    const interceptor = cy.intercept("POST", "api", {
       status: 200,
       delay: 1000,
       body: {
         result: "rue",
       },
     });
-
     cy.contains("Deploy").click();
     cy.contains("Deploy").first().screenshot();
     cy.contains("XOA is ready! Redirecting…").should("be.visible");
   };
 
-  it("Xen Orchestra Quick Deploy Spinner", () => {
+  it.only("Xen Orchestra Quick Deploy Spinner", () => {
     doModalActions();
   });
 
-  it("Xen Orchestra Quick Deploy redirect to new page", () => {
-    cy.clock();
+  it.only("Xen Orchestra Quick Deploy redirect to new page", () => {
     doModalActions();
     cy.tick(4000);
     cy.origin(ipAddressToConfig, { args: { ipAddressToConfig } }, ({ ipAddressToConfig }) => {

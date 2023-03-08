@@ -2,7 +2,11 @@ const { spawn } = require("node:child_process");
 
 const cliArgs = process.argv.slice(2);
 
-console.log(cliArgs);
+if (cliArgs.length == 0) {
+  console.log("Please provide a directory to serve as the first argument");
+  console.log("Example: npm run start -- /users/user1/Documents/xcp-ng-release/src/xenserver/opt/xensource/www");
+  process.exit(0);
+}
 
 const ws = spawn("npm", ["run", "ws", "--", "--https", "--directory", cliArgs[0]]);
 
