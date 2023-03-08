@@ -28,7 +28,7 @@ describe("Deploy", () => {
     cy.get("html").screenshot();
   });
 
-  it("close the modal", () => {
+  it("Close the modal", () => {
     cy.contains("Quick deploy").click();
     // button X of modal
     cy.get(".modal").should("be.visible");
@@ -72,11 +72,11 @@ describe("Deploy", () => {
     cy.contains("XOA is ready! Redirecting…").should("be.visible");
   };
 
-  it.only("Xen Orchestra Quick Deploy Spinner", () => {
+  it("Xen Orchestra Quick Deploy Spinner", () => {
     doModalActions();
   });
 
-  it.only("Xen Orchestra Quick Deploy redirect to new page", () => {
+  it("Xen Orchestra Quick Deploy redirect to new page", () => {
     doModalActions();
     cy.tick(4000);
     cy.origin(ipAddressToConfig, { args: { ipAddressToConfig } }, ({ ipAddressToConfig }) => {
