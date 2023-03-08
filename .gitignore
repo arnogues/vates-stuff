@@ -1,3 +1,4 @@
+
 #systems
 .DS_STORE
 .idea
@@ -107,3 +108,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# cypress 
+*/cypress/*/videos
